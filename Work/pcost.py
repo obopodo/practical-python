@@ -2,22 +2,22 @@
 #
 # Exercise 1.27
 import csv
-import sys
 from report import read_portfolio
 
 def portfolio_cost(filename):
-    total_price = 0.0
+    total_cost = 0.0
     portfolio = read_portfolio(filename)
 
     for i, record in enumerate(portfolio):
-        total_price += record['shares'] * record['price']
+        total_cost += record['shares'] * record['price']
 
-    return total_price
+    return total_cost
 
-# if len(sys.argv) == 2:
-#     filename = sys.argv[1]
-# else:
-#     filename = 'Data/missing.csv'
-#
-# cost = portfolio_cost(filename)
-# print('Total cost:', cost)
+def main(args:list):
+    total_cost = portfolio_cost(args[1])
+    print('Total cost:', total_cost)
+    # return total_cost
+
+if __name__ == '__main__':
+    import sys
+    main(sys.argv)
