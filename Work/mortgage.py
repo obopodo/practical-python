@@ -25,10 +25,10 @@ while principal > 0:
         principal = 0.0
     total_paid = total_paid + payment + extra_payment
 
-    print(month, round(total_paid, 2), round(principal, 2))
+    print(f'{month}\t{total_paid:10.2f}\t{principal:10.2f}')
 
     month += 1
 
 
-print('Months', month-1)
-print('Total paid', round(total_paid, 5))
+print(f'Months\t{month-1}')
+print(f'Total paid\t{total_paid:8.3f}')
