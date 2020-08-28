@@ -5,7 +5,7 @@ import csv
 from pprint import pprint
 import fileparse as fp
 import stock
-import tableformat
+from tableformat import create_formatter, print_table
 
 def read_prices(prices_filename):
     '''Function that reads prices set'''
@@ -42,21 +42,6 @@ def print_report(report, formatter):
         formatter.row(rowdata)
 
 
-def choose_formatter(format='txt'):
-    '''
-    Assign a type to formatter
-    '''
-    if format.lower() == 'txt':
-        formatter = tableformat.TextTableFormatter()
-    elif format.lower() == 'csv':
-        formatter = tableformat.CSVTableFormatter()
-    elif format.lower() == 'html':
-        formatter = tableformat.HTMLTableformatter()
-    else:
-        raise ValueError(f'Sorry, format \'{format}\' is not supported')
-    return formatter
-
-
 def portfolio_report(portfolio_filename, prices_filename, format='txt'):
     '''
     Make a stock report given portfolio and price data files.
@@ -67,7 +52,7 @@ def portfolio_report(portfolio_filename, prices_filename, format='txt'):
     # Create report data:
     report = make_report(portfolio, prices)
     # Print it out:
-    formatter = choose_formatter(format)
+    formatter = create_formatter(format)
     print_report(report, formatter)
 
 

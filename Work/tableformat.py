@@ -48,3 +48,29 @@ class HTMLTableformatter(TableFormatter):
         for d in rowdata:
             print(f'<td>{d}</td>', end='')
         print('</tr>')
+
+class FormatError(Exception):
+    pass
+
+def create_formatter(format='txt'):
+    '''
+    Assign a type to formatter
+    '''
+    if format.lower() == 'txt':
+        formatter = TextTableFormatter()
+    elif format.lower() == 'csv':
+        formatter = CSVTableFormatter()
+    elif format.lower() == 'html':
+        formatter = HTMLTableformatter()
+    else:
+        raise FormatError(f'Sorry, format \'{format}\' is not supported')
+    return formatter
+
+def print_table(portfolio, headers, formatter):
+    '''
+    Print a nicely formated table from a list of (name, shares, price, change) tuples.
+    '''
+    formatter.headings(headers)
+    for row in portfolio:
+        rowdata = [str(getattr(row, h)) for h in headers]
+        formatter.row(rowdata)
