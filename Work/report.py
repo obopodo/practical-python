@@ -6,6 +6,7 @@ from pprint import pprint
 import fileparse as fp
 import stock
 from tableformat import create_formatter, print_table
+from portfolio import Portfolio
 
 def read_prices(prices_filename):
     '''Function that reads prices set'''
@@ -22,7 +23,7 @@ def read_portfolio(portfolio_filename):
     with open(portfolio_filename, 'rt') as inf:
         portdicts = fp.parse_csv(inf, select=['name', 'shares', 'price'], types=[str, int, float])
     portfolio = [stock.Stock(d['name'], d['shares'], d['price']) for d in portdicts]
-    return portfolio
+    return Portfolio(portfolio)
 
 
 def make_report(portfolio, prices):

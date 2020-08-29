@@ -7,11 +7,7 @@ from report import read_portfolio
 def portfolio_cost(filename):
     total_cost = 0.0
     portfolio = read_portfolio(filename)
-
-    for i, record in enumerate(portfolio):
-        total_cost += record.cost
-
-    return total_cost
+    return portfolio.total_cost
 
 def main(args:list):
     total_cost = portfolio_cost(args[1])
