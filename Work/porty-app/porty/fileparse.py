@@ -2,8 +2,12 @@
 #
 # Exercise 3.3
 import csv
+import logging
 
-def parse_csv(iterable, select=None, types=None, has_headers=True, delimiter=',', silence_errors=False):
+log = logging.getLogger(__name__)
+
+def parse_csv(iterable, select=None, types=None, has_headers=True,
+              delimiter=',', silence_errors=False):
     '''
     Parse a csv file into a list of records
     '''
@@ -35,8 +39,8 @@ def parse_csv(iterable, select=None, types=None, has_headers=True, delimiter=','
                 row = [func(val) for func, val in zip(types, row)]
             except ValueError as e:
                 if not silence_errors:
-                    print(f'Row {i}: Couldn`t convert {row}')
-                    print(f'Row {i}: Reason: {e}')
+                    log.warning(f'Row {i}: Couldn`t convert {row}')
+                    log.debug(f'Row {i}: Reason: {e}')
                 continue
 
         if has_headers:

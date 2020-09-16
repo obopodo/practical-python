@@ -2,7 +2,7 @@
 #
 # Exercise 1.27
 import csv
-from report import read_portfolio
+from .report import read_portfolio
 
 def portfolio_cost(filename):
     total_cost = 0.0

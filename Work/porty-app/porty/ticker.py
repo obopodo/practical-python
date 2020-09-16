@@ -1,4 +1,4 @@
-from follow import follow
+from .follow import follow
 import csv
 
 def select_columns(rows, indices):
@@ -21,9 +21,9 @@ def parse_stock_data(lines):
     return rows
 
 def ticker(portfile, logfile, fmt='txt'):
-    from report import read_portfolio
-    from stock import Stock
-    from tableformat import create_formatter, print_table
+    from .report import read_portfolio
+    from .stock import Stock
+    from .tableformat import create_formatter, print_table
 
     portfolio = read_portfolio(portfile)
 

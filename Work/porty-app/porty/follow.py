@@ -22,7 +22,7 @@ def filematch(lines, substring):
             yield line
 
 if __name__ == '__main__':
-    import report
+    from . import report
 
     portfolio = report.read_portfolio('Data/portfolio.csv')
 

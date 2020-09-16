@@ -3,10 +3,10 @@
 # Exercise 2.4
 import csv
 from pprint import pprint
-import fileparse as fp
-import stock
-from tableformat import create_formatter, print_table
-from portfolio import Portfolio
+from . import fileparse as fp
+from . import stock
+from .tableformat import create_formatter, print_table
+from .portfolio import Portfolio
 
 def read_prices(prices_filename):
     '''Function that reads prices set'''
@@ -16,14 +16,13 @@ def read_prices(prices_filename):
     return prices
 
 
-def read_portfolio(portfolio_filename):
+def read_portfolio(portfolio_filename, **opts):
     '''
     Function that reads portfolio dataset into a list of dicts
     '''
     with open(portfolio_filename, 'rt') as inf:
-        portdicts = fp.parse_csv(inf, select=['name', 'shares', 'price'], types=[str, int, float])
-    portfolio = [stock.Stock(d['name'], d['shares'], d['price']) for d in portdicts]
-    return Portfolio(portfolio)
+        port = Portfolio.from_csv(inf)
+    return port
 
 
 def make_report(portfolio, prices):
@@ -68,3 +67,12 @@ if __name__ == '__main__':
     import sys
     if sys.argv:
         main(sys.argv)
+
+# This part sets up basic configuration of the logging module.
+# Change settings here to adjust logging output as needed.
+import logging
+logging.basicConfig(
+    filename = 'app.log',            # Name of the log file (omit to use stderr)
+    filemode = 'w',                  # File mode (use 'a' to append)
+    level    = logging.WARNING       # Logging level (DEBUG, INFO, WARNING, ERROR, or CRITICAL)
+)
